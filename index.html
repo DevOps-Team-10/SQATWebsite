@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative; /* Ensure relative positioning for cart count and list */
+        }
+        .item {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .cart {
+            position: absolute; /* Position cart count absolutely */
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+        .cart-list {
+            position: absolute; /* Position cart list absolutely */
+            top: 40px; /* Adjust the top position to appear below cart count */
+            right: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .cart-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Online Store</h1>
+        <div id="cart" class="cart">0</div>
+        <div id="cartItems" class="cart-list"></div> <!-- Move cart list below the cart count -->
+        <div id="items">
+            <div class="item">
+                <h2>Apple</h2>
+                <button id = "b1" onclick="addToCart('Apple')">Add to Cart</button>
+                <button id = "br1" onclick="removeFromCart('Apple')">Remove from Cart</button>
+            </div>
+            <div class="item">
+                <h2>Banana</h2>
+                <button id = "b2" onclick="addToCart('Banana')">Add to Cart</button>
+                <button id = "br2"onclick="removeFromCart('Banana')">Remove from Cart</button>
+            </div>
+            <div class="item">
+                <h2>Orange</h2>
+                <button id ="b3" onclick="addToCart('Orange')">Add to Cart</button>
+                <button  id = "br3"onclick="removeFromCart('Orange')">Remove from Cart</button>
+            </div>
+            <div class="item">
+                <h2>Mango</h2>
+                <button id = "b4" onclick="addToCart('Mango')">Add to Cart</button>
+                <button id = "br4"onclick="removeFromCart('Mango')">Remove from Cart</button>
+            </div>
+            <div class="item">
+                <h2>Strawberry</h2>
+                <button id = "b5"onclick="addToCart('Strawberry')">Add to Cart</button>
+                <button id ="br5" onclick="removeFromCart('Strawberry')">Remove from Cart</button>
+            </div>
+            <!-- Repeat for other items -->
+        </div>
+    </div>
+
+    <script>
+        let cartItems = [];
+
+        function addToCart(itemName) {
+            cartItems.push(itemName);
+            updateCart();
+        }
+
+        function removeFromCart(itemName) {
+            const index = cartItems.indexOf(itemName);
+            if (index !== -1) {
+                cartItems.splice(index, 1);
+                updateCart();
+            }
+        }
+
+        function updateCart() {
+            const cartElement = document.getElementById('cart');
+            const cartListElement = document.getElementById('cartItems');
+            cartElement.innerText = cartItems.length;
+            cartListElement.innerHTML = '';
+            cartItems.forEach(item => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.textContent = item;
+                cartItemElement.classList.add('cart-item');
+                cartListElement.appendChild(cartItemElement);
+            });
+        }
+    </script>
+</body>
+</html>
